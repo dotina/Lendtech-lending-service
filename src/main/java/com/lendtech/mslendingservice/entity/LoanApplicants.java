@@ -40,8 +40,8 @@ public class LoanApplicants extends BaseModel implements Serializable {
         this.statusId = 1L;
         this.remarks = remarks;
 
-        this.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        this.setCreatedAt(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
+        this.setUpdatedAt(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
     }
 
     public String getFirstName() {

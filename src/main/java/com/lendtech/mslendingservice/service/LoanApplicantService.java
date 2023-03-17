@@ -52,7 +52,7 @@ public class LoanApplicantService {
                 if (request.getLastName()!=null)loanApplicants.setLastName(request.getLastName());
                 if (request.getDocumentNumber()!=null)loanApplicants.setDocumentNumber(request.getDocumentNumber());
                 if(request.getDocumentType()!=null) loanApplicants.setDocumentType(request.getDocumentType());
-                loanApplicants.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+                loanApplicants.setUpdatedAt(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
 
                 return loanApplicantRepository.save(loanApplicants).flatMap(loanApplicants1 -> {
                     LogManager.info(referenceId, TRANSACTION_TYPE, "updatingApplicant", String.valueOf(System.currentTimeMillis() - startTime),
@@ -60,7 +60,7 @@ public class LoanApplicantService {
                             RESPONSE_CODE_200, RESPONSE_SUCCESS, "", parseToJsonString(request),
                             parseToJsonString(loanApplicants1), "");
                     return Mono.just(new ResponseEntity<>(ApiResponse.responseFormatter(referenceId,
-                            RESPONSE_CODE_200, RESPONSE_SUCCESS, "Customer with MSISDN ".concat(request.getMsisdn()).concat("Already Exists! succesfull update done"), loanApplicants1),
+                            RESPONSE_CODE_200, RESPONSE_SUCCESS, "Customer with MSISDN ".concat(request.getMsisdn()).concat("  Already Exists! successfull update done"), loanApplicants1),
                             HttpStatus.OK));
                 });
             }).switchIfEmpty(Mono.defer(()->{
