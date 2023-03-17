@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.sql.Timestamp;
+
 import static com.lendtech.mslendingservice.utilities.GlobalVariables.*;
 import static com.lendtech.mslendingservice.utilities.Utilities.*;
 
@@ -50,6 +52,7 @@ public class LoanApplicantService {
                 if (request.getLastName()!=null)loanApplicants.setLastName(request.getLastName());
                 if (request.getDocumentNumber()!=null)loanApplicants.setDocumentNumber(request.getDocumentNumber());
                 if(request.getDocumentType()!=null) loanApplicants.setDocumentType(request.getDocumentType());
+                loanApplicants.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
                 return loanApplicantRepository.save(loanApplicants).flatMap(loanApplicants1 -> {
                     LogManager.info(referenceId, TRANSACTION_TYPE, "updatingApplicant", String.valueOf(System.currentTimeMillis() - startTime),

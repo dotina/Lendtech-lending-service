@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Table("tbl_loan_applicants")
+@Table("tbl_loan_applicant")
 public class LoanApplicants extends BaseModel implements Serializable {
 
     private String firstName;
@@ -22,7 +22,7 @@ public class LoanApplicants extends BaseModel implements Serializable {
     private String conversationId;
     private Long statusId;
 
-    private Timestamp deletedAt;
+    private Long deletedStatusId;
 
     private String remarks;
 
@@ -39,6 +39,9 @@ public class LoanApplicants extends BaseModel implements Serializable {
         this.conversationId = conversationId;
         this.statusId = 1L;
         this.remarks = remarks;
+
+        this.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
     }
 
     public String getFirstName() {
@@ -106,12 +109,12 @@ public class LoanApplicants extends BaseModel implements Serializable {
         this.statusId = statusId;
     }
 
-    public Timestamp getDeletedAt() {
-        return deletedAt;
+    public Long getDeletedStatusId() {
+        return deletedStatusId;
     }
 
-    public void setDeletedAt(Timestamp deletedAt) {
-        this.deletedAt = deletedAt;
+    public void setDeletedStatusId(Long deletedStatusId) {
+        this.deletedStatusId = deletedStatusId;
     }
 
     public String getRemarks() {
