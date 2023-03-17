@@ -1,35 +1,25 @@
-package com.lendtech.mslendingservice.service;
-
+package com.lendtech.mslendingservice.configs;
 
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
 import com.lendtech.mslendingservice.utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
-import java.time.Duration;
-import java.util.Collections;
 import java.util.Objects;
-import java.util.Optional;
 
 import static com.lendtech.mslendingservice.utilities.GlobalVariables.*;
 import static com.lendtech.mslendingservice.utilities.Utilities.generateTrackingID;
 
-
-@Service
-public class ApiService {
+@Component
+public class CommonFunctions {
     private final Validations validations;
 
     @Autowired
-    public ApiService(Validations validations) {
+    public CommonFunctions(Validations validations) {
         this.validations = validations;
     }
-
-
 
     public Mono<ApiResponse> processValidation(HttpHeaders httpHeaders) {
 
@@ -52,6 +42,4 @@ public class ApiService {
                         RESPONSE_SERVICE_UNREACHABLE, null))
         );
     }
-
-
 }

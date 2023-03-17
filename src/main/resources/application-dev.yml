@@ -6,6 +6,11 @@ app-properties:
   api-username: admin
   api-password: admin
 
+#sms items
+twilio:
+  account_id: AC5b274f17de1cfcf105463db66480bb73
+  auth_token: d83a82722409c5cde77c37860bb9863b
+  trial_number: +19124058761
 
 ########################################################
 # DATABASE CONFIGURATIONS
