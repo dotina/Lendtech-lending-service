@@ -9,7 +9,7 @@ app-properties:
 #sms items
 twilio:
   account_id: AC5f156ea6e5beebe9b4bc93fdf4d306c4
-  auth_token: c27a477a4f95845c8e68dee7ebc166be
+  auth_token: ae88ecaf17d0573bd1d5f45c87402141
   trial_number: +15077057395
 
 ########################################################

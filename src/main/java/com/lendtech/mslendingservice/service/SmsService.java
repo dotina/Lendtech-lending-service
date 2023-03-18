@@ -39,9 +39,9 @@ public class SmsService {
                     RESPONSE_CODE_200, RESPONSE_SUCCESS, "", parseToJsonString(smsRequest),
                     "", "");
         }catch(Exception e){
-            LogManager.error(generateTrackingID(), HEADERS, PROCESS_HEADER, "", smsRequest.getPhoneNumber()
-                    , SOURCE, TARGET_SYSTEM_DB, RESPONSE_FAILED,
-                    RESPONSE_CODE_500, RESPONSE_FAILED, e.getMessage(), parseToJsonString(smsRequest), "", "");
+            LogManager.error(generateTrackingID(), TRANSACTION_TYPE, "sendingSMSViaTwilioError", "", smsRequest.getPhoneNumber()
+                    , SOURCE, "TWILIO-SMSC", RESPONSE_FAILED,
+                    RESPONSE_CODE_500, RESPONSE_FAILED, e.getMessage(), parseToJsonString(smsRequest), e.getLocalizedMessage(), "");
         }
     }
 }

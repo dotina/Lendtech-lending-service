@@ -13,7 +13,7 @@ public class GlobalVariables {
     /*================================================
      * SYSTEM INTERACTIONS
      * ==============================================*/
-    public static final String TRANSACTION_TYPE = "MTA-Process";
+    public static final String TRANSACTION_TYPE = "ms-lending-process";
     public static final String HEADERS = "Headers";
     public static final String SOURCE = "APi call";
     public static final String PROCESS_HEADER = "Header Checks";
