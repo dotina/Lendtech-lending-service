@@ -8,9 +8,9 @@ app-properties:
 
 #sms items
 twilio:
-  account_id: AC5b274f17de1cfcf105463db66480bb73
-  auth_token: d83a82722409c5cde77c37860bb9863b
-  trial_number: +19124058761
+  account_id: AC5f156ea6e5beebe9b4bc93fdf4d306c4
+  auth_token: c27a477a4f95845c8e68dee7ebc166be
+  trial_number: +15077057395
 
 ########################################################
 # DATABASE CONFIGURATIONS
