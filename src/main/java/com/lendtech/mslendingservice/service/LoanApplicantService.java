@@ -40,7 +40,7 @@ public class LoanApplicantService {
             if (apiResponse.getResponseHeader().getResponseCode() != 0) {
                 LogManager.error(generateTrackingID(), HEADERS, PROCESS_HEADER, String.valueOf(System.currentTimeMillis() - startTime), request.getMsisdn()
                         , SOURCE, VAL, HEADER_RESPONSE, 400, HEADER_MSG,
-                        "validating add elevator", "", "", null);
+                        "validating loan applicant err", "", "", null);
                 return Mono.just(new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST));
             }
             String referenceId = apiResponse.getResponseHeader().getRequestRefId();
@@ -80,8 +80,4 @@ public class LoanApplicantService {
             }));
         });
     }
-
-
-
-
 }

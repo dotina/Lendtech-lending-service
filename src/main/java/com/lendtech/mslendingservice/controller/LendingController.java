@@ -3,7 +3,9 @@ package com.lendtech.mslendingservice.controller;
 
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
 import com.lendtech.mslendingservice.models.pojo.LoanApplicantRequest;
+import com.lendtech.mslendingservice.models.pojo.LoanRequest;
 import com.lendtech.mslendingservice.service.LoanApplicantService;
+import com.lendtech.mslendingservice.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +18,28 @@ import reactor.core.publisher.Mono;
 @RequestMapping("api/v1")
 public class LendingController {
 
-    private final LoanApplicantService apiService;
+    private final LoanApplicantService loanApplicantService;
+    private final LoanService loanService;
 
     @Autowired
-    public LendingController(LoanApplicantService apiService) {
-        this.apiService = apiService;
+    public LendingController(LoanApplicantService loanApplicantService, LoanService loanService) {
+        this.loanApplicantService = loanApplicantService;
+        this.loanService = loanService;
     }
 
     @PostMapping("/applicant/onboard")
-    public Mono<ResponseEntity<ApiResponse>> serviceHandlerCreateElevator(
+    public Mono<ResponseEntity<ApiResponse>> serviceHandlerCreateLoanApplicant(
             @RequestHeader HttpHeaders httpHeaders,
             @RequestBody LoanApplicantRequest requestBody){
         long startTime = System.currentTimeMillis();
-        return apiService.processApplicantOnboardingRequest(httpHeaders,requestBody, startTime);
+        return loanApplicantService.processApplicantOnboardingRequest(httpHeaders,requestBody, startTime);
+    }
+
+    @PostMapping("/loan/create")
+    public Mono<ResponseEntity<ApiResponse>> serviceHandlerCreateLoan(
+            @RequestHeader HttpHeaders httpHeaders,
+            @RequestBody LoanRequest requestBody){
+        long startTime = System.currentTimeMillis();
+        return loanService.processLoanRequest(httpHeaders,requestBody, startTime);
     }
 }

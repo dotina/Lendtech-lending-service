@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,6 +27,10 @@ public class Utilities {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(REQUEST_DATE_TIME_FORMAT);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return simpleDateFormat.format(timestamp);
+    }
+
+    public static LocalDateTime nextDueDate(LocalDateTime currentDateTime, long duration) {
+        return currentDateTime.plusYears(duration);
     }
 
     public static String generateTrackingID() {

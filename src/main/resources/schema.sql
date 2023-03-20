@@ -7,7 +7,7 @@ create table if not exists tbl_loan_applicant
     created_at         timestamp default CURRENT_TIMESTAMP,
     updated_at         timestamp default CURRENT_TIMESTAMP,
     conversation_id    varchar(50),
-    deleted_status_id      bigint,
+    deleted_status_id      bigint default 0 not null,
     document_number    varchar(50),
     document_type      varchar(50),
     email              varchar(100),
@@ -15,8 +15,7 @@ create table if not exists tbl_loan_applicant
     last_name          varchar(50),
     msisdn             varchar(250),
     remarks            varchar(200),
-    status_id          bigint,
-    sponsor_program_id integer default 0 not null
+    status_id          bigint
 );
 
 create unique index tbl_loan_applicant_msisdn_uindex
@@ -37,25 +36,24 @@ create table if not exists tbl_loan
             primary key,
     created_at              timestamp default CURRENT_TIMESTAMP,
     updated_at              timestamp default CURRENT_TIMESTAMP,
-    deleted_status_id         bigint,
-    conversation_id         varchar(50),
+    deleted_status_id         bigint default 0 not null,
+    conversation_id         varchar(50) not null,
     credit_score            integer,
-    deposit_amount          double precision,
     installment_amount      double precision,
     loan_amount_balance     double precision,
     loan_completion_date    timestamp,
     loan_creation_date      timestamp,
     loan_limit              double precision,
-    loan_start_date         timestamp,
-    next_due_date           timestamp,
     principle_amount        double precision,
+    disbursed_amount        double precision,
+    loan_interest_rate        double precision,
+    active_status           boolean default false not null,
     remarks                 varchar(200),
-    statement_id            varchar(50),
 
     loan_applicant_id       bigint
         constraint tbl_loan_tbl_loan_applicant_id_fk
             references tbl_loan_applicant,
-    mpesa_transaction_id    varchar(20)
+    bank_lending_transaction_id    varchar(20)
 --    constraint tbl_loan_check
 --        check (date(next_due_date) > date(loan_start_date))
 );
