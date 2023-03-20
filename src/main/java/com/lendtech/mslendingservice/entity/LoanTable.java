@@ -18,6 +18,7 @@ public class LoanTable extends BaseModel{
     private Double creditScore;
     private Double installmentAmount;
     private Double loanAmountBalance;
+    private LocalDateTime nextDueDate;
     private LocalDateTime loanCompletionDate;
     private LocalDateTime loanCreationDate;
     private Double loanLimit;
@@ -31,7 +32,10 @@ public class LoanTable extends BaseModel{
     public LoanTable() {
     }
 
-    public LoanTable(String conversationId, Boolean isActiveStatus,  String remarks, Double creditScore, Double installmentAmount, Double loanAmountBalance, LocalDateTime loanCompletionDate, LocalDateTime loanCreationDate, Double loanLimit, Double principleAmount, Double disbursedAmount, String bankLendingTransactionId, Long loanApplicantId, Double loanInterestRate) {
+    public LoanTable(String conversationId, Boolean isActiveStatus,  String remarks, Double creditScore, Double installmentAmount,
+                     Double loanAmountBalance, LocalDateTime loanCompletionDate, LocalDateTime loanCreationDate, Double loanLimit,
+                     Double principleAmount, Double disbursedAmount, String bankLendingTransactionId, Long loanApplicantId,
+                     Double loanInterestRate, LocalDateTime nextDueDate) {
         this.conversationId = conversationId;
         this.isActiveStatus = isActiveStatus;
         this.remarks = remarks;
@@ -46,6 +50,15 @@ public class LoanTable extends BaseModel{
         this.bankLendingTransactionId = bankLendingTransactionId;
         this.loanApplicantId = loanApplicantId;
         this.loanInterestRate = loanInterestRate;
+        this.nextDueDate = nextDueDate;
+    }
+
+    public LocalDateTime getNextDueDate() {
+        return nextDueDate;
+    }
+
+    public void setNextDueDate(LocalDateTime nextDueDate) {
+        this.nextDueDate = nextDueDate;
     }
 
     public Double getLoanInterestRate() {

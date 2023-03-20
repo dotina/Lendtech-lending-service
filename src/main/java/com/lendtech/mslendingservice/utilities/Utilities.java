@@ -29,8 +29,12 @@ public class Utilities {
         return simpleDateFormat.format(timestamp);
     }
 
-    public static LocalDateTime nextDueDate(LocalDateTime currentDateTime, long duration) {
+    public static LocalDateTime nextDueYear(LocalDateTime currentDateTime, long duration) {
         return currentDateTime.plusYears(duration);
+    }
+
+    public static LocalDateTime nextDueMonth(LocalDateTime currentDateTime, long duration) {
+        return currentDateTime.plusMonths(duration);
     }
 
     public static String generateTrackingID() {

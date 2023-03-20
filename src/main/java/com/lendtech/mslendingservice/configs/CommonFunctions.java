@@ -1,7 +1,9 @@
 package com.lendtech.mslendingservice.configs;
 
 import com.lendtech.mslendingservice.entity.LoanTable;
+import com.lendtech.mslendingservice.entity.LoanTransaction;
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
+import com.lendtech.mslendingservice.models.pojo.LoanRepaymentRequest;
 import com.lendtech.mslendingservice.models.pojo.LoanRequest;
 import com.lendtech.mslendingservice.utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static com.lendtech.mslendingservice.utilities.GlobalVariables.*;
-import static com.lendtech.mslendingservice.utilities.Utilities.generateTrackingID;
-import static com.lendtech.mslendingservice.utilities.Utilities.nextDueDate;
+import static com.lendtech.mslendingservice.utilities.Utilities.*;
 
 @Component
 public class CommonFunctions {
@@ -59,10 +60,15 @@ public class CommonFunctions {
     public LoanTable prepareLoan(Long applicantId, LoanRequest request, String reference){
 
         Double disbursedAmount = request.getPrincipleAmount() * ((1+(request.getLoanInterestRate()/100))*request.getLoanDuration());  // formula A = P (1+rt)
-        LocalDateTime loanCompletionDate = nextDueDate(new Timestamp(System.currentTimeMillis()).toLocalDateTime(), request.getLoanDuration());
+        LocalDateTime loanCompletionDate = nextDueYear(new Timestamp(System.currentTimeMillis()).toLocalDateTime(), request.getLoanDuration());
+        LocalDateTime nextDueDate = nextDueMonth(new Timestamp(System.currentTimeMillis()).toLocalDateTime(), 1);
 
         return new LoanTable(reference, true,  "", request.getCreditScore(), request.getInstallmentAmount(), disbursedAmount,
                 loanCompletionDate, new Timestamp(System.currentTimeMillis()).toLocalDateTime(),
-                request.getLoanLimit(), request.getPrincipleAmount(), disbursedAmount, reference, applicantId, request.getLoanInterestRate());
+                request.getLoanLimit(), request.getPrincipleAmount(), disbursedAmount, reference, applicantId, request.getLoanInterestRate(), nextDueDate);
+    }
+
+    public LoanTransaction prepareLoanRepayment(Long loanId, LoanRepaymentRequest request, String reference){
+        return new LoanTransaction(reference, "Paying for loan ",request.getAmount(), reference, loanId);
     }
 }

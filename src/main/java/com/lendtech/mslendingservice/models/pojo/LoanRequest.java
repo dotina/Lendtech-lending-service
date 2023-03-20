@@ -10,12 +10,18 @@ public class LoanRequest {
     @JsonProperty("msisdn")
     private String msisdn;
     @NotNull(message = "Invalid Entry")
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Double loanInterestRate;
     @NotNull(message = "Invalid Entry")
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Double principleAmount;
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Double loanLimit;
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Long loanDuration;
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Double installmentAmount;
+    @Pattern(regexp = "^[0-9]*$", message = "only numbers allowed")
     private Double creditScore;
     public String getMsisdn() {
         return msisdn;

@@ -3,8 +3,10 @@ package com.lendtech.mslendingservice.controller;
 
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
 import com.lendtech.mslendingservice.models.pojo.LoanApplicantRequest;
+import com.lendtech.mslendingservice.models.pojo.LoanRepaymentRequest;
 import com.lendtech.mslendingservice.models.pojo.LoanRequest;
 import com.lendtech.mslendingservice.service.LoanApplicantService;
+import com.lendtech.mslendingservice.service.LoanRepaymentService;
 import com.lendtech.mslendingservice.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,11 +22,13 @@ public class LendingController {
 
     private final LoanApplicantService loanApplicantService;
     private final LoanService loanService;
+    private final LoanRepaymentService loanRepaymentService;
 
     @Autowired
-    public LendingController(LoanApplicantService loanApplicantService, LoanService loanService) {
+    public LendingController(LoanApplicantService loanApplicantService, LoanService loanService, LoanRepaymentService loanRepaymentService) {
         this.loanApplicantService = loanApplicantService;
         this.loanService = loanService;
+        this.loanRepaymentService = loanRepaymentService;
     }
 
     @PostMapping("/applicant/onboard")
@@ -41,5 +45,13 @@ public class LendingController {
             @RequestBody LoanRequest requestBody){
         long startTime = System.currentTimeMillis();
         return loanService.processLoanRequest(httpHeaders,requestBody, startTime);
+    }
+
+    @PostMapping("/loan/repayment")
+    public Mono<ResponseEntity<ApiResponse>> serviceHandlerLoanRepayment(
+            @RequestHeader HttpHeaders httpHeaders,
+            @RequestBody LoanRepaymentRequest requestBody){
+        long startTime = System.currentTimeMillis();
+        return loanRepaymentService.processLoanRepaymentRequest(httpHeaders,requestBody, startTime);
     }
 }

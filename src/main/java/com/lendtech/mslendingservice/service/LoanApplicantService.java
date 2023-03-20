@@ -18,7 +18,8 @@ import reactor.core.publisher.Mono;
 import java.sql.Timestamp;
 
 import static com.lendtech.mslendingservice.utilities.GlobalVariables.*;
-import static com.lendtech.mslendingservice.utilities.Utilities.*;
+import static com.lendtech.mslendingservice.utilities.Utilities.generateTrackingID;
+import static com.lendtech.mslendingservice.utilities.Utilities.parseToJsonString;
 
 
 @Service

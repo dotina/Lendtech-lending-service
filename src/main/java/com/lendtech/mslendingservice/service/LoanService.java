@@ -2,7 +2,6 @@ package com.lendtech.mslendingservice.service;
 
 import com.lendtech.mslendingservice.configs.CommonFunctions;
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
-import com.lendtech.mslendingservice.models.pojo.LoanApplicantRequest;
 import com.lendtech.mslendingservice.models.pojo.LoanRequest;
 import com.lendtech.mslendingservice.models.pojo.SmsRequest;
 import com.lendtech.mslendingservice.repository.LoanApplicantRepository;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import static com.lendtech.mslendingservice.utilities.GlobalVariables.*;
-import static com.lendtech.mslendingservice.utilities.GlobalVariables.HEADER_MSG;
 import static com.lendtech.mslendingservice.utilities.Utilities.generateTrackingID;
 import static com.lendtech.mslendingservice.utilities.Utilities.parseToJsonString;
 

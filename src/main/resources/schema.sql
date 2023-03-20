@@ -41,6 +41,7 @@ create table if not exists tbl_loan
     credit_score            integer,
     installment_amount      double precision,
     loan_amount_balance     double precision,
+    next_due_date    timestamp,
     loan_completion_date    timestamp,
     loan_creation_date      timestamp,
     loan_limit              double precision,
@@ -56,4 +57,23 @@ create table if not exists tbl_loan
     bank_lending_transaction_id    varchar(20)
 --    constraint tbl_loan_check
 --        check (date(next_due_date) > date(loan_start_date))
+);
+
+--The loan transaction tables
+create table if not exists tbl_transaction
+(
+    id                      bigserial
+        constraint tbl_transaction_pk
+            primary key,
+    created_at              timestamp default CURRENT_TIMESTAMP,
+    updated_at              timestamp default CURRENT_TIMESTAMP,
+    deleted_status_id         bigint default 0 not null,
+    conversation_id         varchar(50) not null,
+    amount      double precision,
+    remarks                 varchar(200),
+
+    loan_id       bigint
+        constraint tbl_transaction_tbl_loan_id_fk
+            references tbl_transaction,
+    bank_lending_transaction_id    varchar(20)
 );
