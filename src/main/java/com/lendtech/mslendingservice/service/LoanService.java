@@ -4,6 +4,7 @@ import com.lendtech.mslendingservice.configs.CommonFunctions;
 import com.lendtech.mslendingservice.models.payloads.api.ApiResponse;
 import com.lendtech.mslendingservice.models.pojo.LoanApplicantRequest;
 import com.lendtech.mslendingservice.models.pojo.LoanRequest;
+import com.lendtech.mslendingservice.models.pojo.SmsRequest;
 import com.lendtech.mslendingservice.repository.LoanApplicantRepository;
 import com.lendtech.mslendingservice.repository.LoanRepository;
 import com.lendtech.mslendingservice.utilities.LogManager;
@@ -56,6 +57,8 @@ public class LoanService {
                             HttpStatus.OK));
                 }).switchIfEmpty(Mono.defer(()->{
                     return loanRepository.save(commonFunctions.prepareLoan(loanApplicants.getId(), request, referenceId)).flatMap(loanTable -> {
+                        // send the customer notification on successfull loan creation
+                        smsService.sendSms(new SmsRequest(request.getMsisdn(),"Your has been created successfully. with loan reference -- "+loanTable.getBankLendingTransactionId()));
                         LogManager.info(referenceId, TRANSACTION_TYPE, "loanCreation", String.valueOf(System.currentTimeMillis() - startTime),
                                 request.getMsisdn(), sourceSystem, TARGET_SYSTEM_DB, RESPONSE_SUCCESSFUL,
                                 RESPONSE_CODE_200, RESPONSE_SUCCESS, "", parseToJsonString(request),
